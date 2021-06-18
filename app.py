@@ -3,7 +3,7 @@ from flask import Flask, render_template, Response, jsonify, request, abort
 from werkzeug.utils import secure_filename
 import imghdr
 from get_data import prediction, get_sel_images
-from get_data import livePrediction
+# from get_data import livePrediction
 import os
 
 
