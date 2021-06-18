@@ -38,6 +38,11 @@ def validate_image(stream):
     if not format:
         return None
     return '.' + (format if format != 'jpeg' else 'jpg')
+   
+
+@app.route('/favicon.ico', methods=["GET", "POST"]) 
+def favicon(): 
+    return '', 204
 
 # default app route
 @app.route('/', methods=["GET", "POST"])
@@ -78,19 +83,6 @@ def get_selected_images():
 @app.route("/video_feed", methods=["GET", "POST"])
 def video_feed():    
     return Response(livePrediction(), mimetype='multipart/x-mixed-replace; boundary=frame')
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 if __name__ == "__main__":
