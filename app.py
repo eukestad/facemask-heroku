@@ -40,7 +40,7 @@ def validate_image(stream):
     return '.' + (format if format != 'jpeg' else 'jpg')
 
 # default app route
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def index():
     return render_template('index.html')
 
@@ -59,7 +59,7 @@ def uploader():
 
 
 # app route for image prediction
-@app.route("/get_image/<img>")
+@app.route("/get_image/<img>", methods=["GET", "POST"])
 def get_predicted_image(img):
     print("image file rendered:",img)
     #img = "people5.jpg"
@@ -68,14 +68,14 @@ def get_predicted_image(img):
     return jsonify(data)
 
 # app route for image file selection
-@app.route("/api/v1.0/select_option")
+@app.route("/api/v1.0/select_option", methods=["GET", "POST"])
 def get_selected_images():    
     img_files = get_sel_images()
     return jsonify(img_files)
 
 
 # app route for video feed
-@app.route("/video_feed")
+@app.route("/video_feed", methods=["GET", "POST"])
 def video_feed():    
     return Response(livePrediction(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
