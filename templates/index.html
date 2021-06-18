@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Face Mask Detection</title>
+  <!-- CSS only -->
+<!--Boot Strap-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!--Glyphicons-->
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+
+<!-- Fonts from google -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Bungee+Inline&family=Bungee+Shade&family=Chathura:wght@800&family=Girassol&family=Karantina&family=Niconne&family=Odibee+Sans&family=Romanesco&display=swap" rel="stylesheet"></head>
+
+<!-- Our CSS -->
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+
+<!-- JQuery from google CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+
+
+<body class="border border-dark boder-1">
+
+<!-- row1 -->
+  <div class="container-fluid hero-image flex-grow-1">
+    <div class="hero-text">
+      <h1 style="font-size:50px">Face Mask Detection</h1>
+      <a href="/" alt=mask_icon><img id="reset" class="set_image" src="/static/Images/1.png"></a>
+      <h4>Are you wearing a facemask?</h4>      
+    </div>
+  </div>
+
+  <!-- row 2 -->
+  <!-- selection options -->
+  <div class="container-fluid box text-center">
+    <div class="row flex-nowrap">
+      <div class="card d-flex flex-nowrap  d-inline-block border-0" style="display:inline-block;"></div>
+      <div class="d-flex flex-nowrap d-inline-block mt-3 ml-5 mr-5 mb-3 margin-set set_card" style="display:inline-block;">
+      <div class="card set-card-width">
+        <a href="#" alt="select_Image"><img id="select" class="card-img-top p-2" src="/static/Images/select1.png"   width="100" height="130" alt="Card image cap"></a>
+        <div class="card-body p-0">
+          <h4 class="card-title" style="font-size:18px;">SELECT</h4>
+        </div>
+      </div>
+      </div>
+      <!-- card 2 -->
+      <div class="d-flex flex-nowrap d-inline-block mt-3 ml-5 mr-5 mb-3 set_card" style="display:inline-block;" >
+        <div class="card d-inline-block set-card-width">
+          <a href="#" alt="select_Image"><img id="browse" class="card-img-top p-2" src="/static/Images/browse1.png" width="100" height="130" alt="Card image cap"></a>
+          <div class="card-body p-0">
+            <h4 class="card-title" style="font-size:18px;">BROWSE</h4>
+          </div>
+        </div>
+        </div>
+        <!-- card3 -->
+        <div class="d-flex flex-nowrap d-inline-block mt-3 ml-5 mr-5 mb-3 set_card" style="display:inline-block;">
+          <div class="card set-card-width">
+            <a href="#" alt="select_Image"><img id="camera" class="card-img-top p-2" src="/static/Images/camera1.png" width="100" height="130" alt="Card image cap"></a>
+            <div class="card-body p-0">
+              <h4 class="card-title" style="font-size:18px;">CAMERA</h4>
+            </div>
+          </div>
+          </div>
+          <!-- card 4 -->
+          <div class="d-flex flex-nowrap d-inline-block mt-3 ml-5 mr-5 mb-3 set_card" style="display:inline-block;">
+            <div class="card set-card-width">
+              <a id="set_analysis" href="#analysis-page" alt="select_Image"><img id="analysis" class="card-img-top p-2" src="/static/Images/analysis.png" width="100" height="130" alt="Card image cap"></a>
+              <div class="card-body p-0">
+                <h4 class="card-title" style="font-size:18px;">ANALYSIS</h4>
+              </div>
+            </div>
+            </div>
+            <!-- card5 -->
+            <div class="d-flex flex-nowrap d-inline-block mt-3 ml-5 mr-5 mb-3 set_card" style="display:inline-block;">
+              <div class="card set-card-width">
+                <a href="#find-us" alt="select_Image"><img class="card-img-top p-2" src="/static/Images/find_us.png" width="100" height="130" alt="Card image cap"></a>
+                <div class="card-body p-0">
+                  <h4 class="card-title" style="font-size:18px;">FIND US</h4>
+                </div>
+              </div>
+              </div>
+              </div>
+    </div>
+  </div>
+
+<!-- Create a row for selection -->
+<div class="container-fluid" style="background-color:rgb(212, 197, 197);">
+  <div class="row flex-nowrap box"> <!-- "background-image: url(./static/Images/backg.png)"  -->
+    <div id="select_option">
+
+    </div>
+  </div>
+</div>
+
+<!-- Create a row for Image Display -->
+<div id="predict" class="container-fluid" style="background-color:rgb(39, 37, 37);">
+  <div class="row">        
+    <div class="col-12 text-center">
+      <h3 class="text-light text-center">Prediction Result</h3> 
+      <div class="container-fluid">
+        <div>
+          <img id="predict_image" class="image-fluid w-100" src="./static/images/default_prediction.jpg">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Camera -->
+
+<div id="livevideo" class="container-fluid" style="background-color:rgb(39, 37, 37);">
+  <div class="row">        
+    <div class="col-12 text-center">
+      <h3 class="text-light text-center">Live Streaming .....</h3> 
+      <div class="container">
+        <div>
+          <img id="show_camera" class="border boder-4 border-primary" src="{{url_for('video_feed')}}" width="75%">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create a row for Analysis -->
+<div id ="analysis-page" class="container set-display">
+  <div  class="row"> 
+    <div id="analyze" class="col-12 ml-3 mr-5">
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Create a row for Find Us -->
+<div id ="find-us" class="container-fluid">
+  <br><br><br>
+  <div class="flex-grow-1 justify-content-center">
+    <hr class="line-set " style="border:3px solid red">
+  </div>
+  <div  class="row set-posi-findus box1"> 
+    
+    <div class="col-12 ml-3 mr-5 text-center">
+      <h2>Find Us On</h2>
+      <div class="w-100 d-flex justify-content-center">
+       <div class=" border border-info border-3 p-5">
+        <!-- add card group with 3 cards -->
+        <div class="  d-flex flex-nowrap border border-info border-3 p-4">
+          <a href="https://github.com/shaineb" alt="Shane"><div class="card find-card mt-5 mb-5 border border-0">
+            <img class="card-img-top image-fluid pt-3 pl-3 pr-3 pb-1" src="./static/Images/git_b.png" alt="Card image cap">
+            <div class="card-body p-1  text-info"> Shaine Balero</div>
+          </div> 
+        </a>
+        <a href="https://github.com/divya-gh" alt="Divya">
+          <div class="card find-card mt-5 mb-5 border border-0">
+            <img class="card-img-top image-fluid pt-3 pl-3 pr-3 pb-1" src="/static/Images/git_a.png" alt="Card image cap">
+            <div class="card-body p-1 text-info"> Divya Shetty</div>
+          </div>
+        </a>
+        <a href="https://github.com/eukestad" alt="Erin">
+          <div class="card find-card mt-5 mb-5 border border-0">
+            <img class="card-img-top image-fluid pt-3 pl-3 pr-3 pb-1" src="/static/Images/git_c.png" alt="Card image cap">
+            <div class="card-body p-1 text-info"> Erin Ukestad</div>
+          </div>
+        </a>
+        <a href="https://github.com/nadiaaldrich" alt="Nadia">
+          <div class="card find-card mt-5 mb-5 border border-0">
+            <img class="card-img-top image-fluid pt-3 pl-3 pr-3 pb-1" src="/static/Images/git_d.png" alt="Card image cap">
+            <div class="card-body p-1 text-info"> Nadia Aldrich</div>
+          </div>
+        </a>
+        </div>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-center text-white">
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(2, 4, 26, 0.2);">
+    © 2021 Copyright:&nbsp &nbsp
+    <a class="text-white" href="#"><i class="fa fa-hand-pointer-o bounce" aria-hidden="true" style='font-size:30px;color:white;'></i></a>
+  </div>
+  <!-- Copyright -->
+</footer>
+
+    <!--container end -->
+    
+<!-- Javascript files -->
+<!-- D3 JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+
+ <!--Our javaScript file-->
+  <!---------------------------------------------->
+  <!-- Launch Page -->
+  <script src="/static/js/launch.js"></script>
+
+
+</body>
+</html>
