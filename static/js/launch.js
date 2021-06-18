@@ -143,42 +143,48 @@ $(document).ready(function(){
             // set class
             var selection = d3.select("#select_option").classed("set_browse_height", true).classed("set_div_height", false)
             
+            // var inputForm = '<form enctype="multipart/form-data" action="/upload" method="post"> \
+            //                      <div class="form-group"> \
+            //                      <label for="formFileSm" class="form-label h6 m-0">Upload a picture with maximum neighbours = 3 <br>\
+            //                      <span style="font-size:13px;"> ( File Format: .jpg, .png )</span> </label>\
+            //                      <input class="form-control form-control-sm set-browse rounded-lg w-50" id="myFile" name="file" type="file" />\
+            //                      <br>\
+            //                      <button type = "submit" class="btn btn-success">Submit</button> \
+            //                      </div> \
+            //                      <h6 id="upload-message" class="text-primary"><strong></strong></h6> \
+            //                 </form>'
+
             var inputForm = '<form enctype="multipart/form-data" action="/upload" method="post"> \
                                  <div class="form-group"> \
-                                 <label for="formFileSm" class="form-label h6 m-0">Upload a picture with maximum neighbours = 3 <br>\
-                                 <span style="font-size:13px;"> ( File Format: .jpg, .png )</span> </label>\
-                                 <input class="form-control form-control-sm set-browse rounded-lg w-50" id="myFile" name="file" type="file" />\
-                                 <br>\
-                                 <button type = "submit" class="btn btn-success">Submit</button> \
-                                 </div> \
-                                 <h6 id="upload-message" class="text-primary"><strong></strong></h6> \
+                                 <h6 id="upload-message" class="text-primary"><strong>Upload Feature Coming Soon!</strong></h6> \
                             </form>'
+
 
             var browseForm = selection.html(inputForm)
 
             //enent handing : get value on file upload
-            browseForm.on("submit" , () => {
+            // browseForm.on("submit" , () => {
     
-                console.log("get browsed file:", $("#myFile").val())
-                d3.select("#note").text("Image uploaded successfully!")
-                var saveLocation = './static/upload'
-                var fileFakePath = $("#myFile").val()
-                var fileName = fileFakePath.substring(12)
+            //     console.log("get browsed file:", $("#myFile").val())
+            //     // d3.select("#note").text("Image uploaded successfully!")
+            //     var saveLocation = './static/upload'
+            //     var fileFakePath = $("#myFile").val()
+            //     var fileName = fileFakePath.substring(12)
 
-                var runPath = `${saveLocation}/${fileName}`
-                console.log(runPath)
+            //     var runPath = `${saveLocation}/${fileName}`
+            //     console.log(runPath)
 
-                // renderPredictedImage(runPath)
-                // Render selected Image for prediction
-                d3.json(`/get_image/${fileName}`).then((data) => { 
-                    console.log("Prediction Data:", data);
+            //     // renderPredictedImage(runPath)
+            //     // Render selected Image for prediction
+            //     d3.json(`/get_image/${fileName}`).then((data) => { 
+            //         console.log("Prediction Data:", data);
     
-                    var image_selector = d3.select("#predict_image")
-                    image_selector.attr("src" , `${data.Image_path}`)
+            //         var image_selector = d3.select("#predict_image")
+            //         image_selector.attr("src" , `${data.Image_path}`)
     
-                });
+            //     });
 
-            });  //End of browForm on change
+            // });  //End of browForm on change
 
         });//End of Browse selection option
 
