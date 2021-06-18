@@ -143,65 +143,40 @@ $(document).ready(function(){
             // set class
             var selection = d3.select("#select_option").classed("set_browse_height", true).classed("set_div_height", false)
             
-            // // set input form
-            var inputForm = '<label for="formFileSm" class="form-label h6 m-0">Upload a picture with maximum neighbours = 3 <br><span style="font-size:13px;"> ( File Format: .jpg, .png )</span> </label><input class="form-control form-control-sm set-browse rounded-lg w-50" id="myFile" type="file" /><h6 id="note" style="font-size:13px;">Note: Save your pictures in the<em>UploadPic</em> folder.</h6>'
+            var inputForm = '<form enctype="multipart/form-data" action="/upload" method="post"> \
+                                 <div class="form-group"> \
+                                 <label for="formFileSm" class="form-label h6 m-0">Upload a picture with maximum neighbours = 3 <br>\
+                                 <span style="font-size:13px;"> ( File Format: .jpg, .png )</span> </label>\
+                                 <input class="form-control form-control-sm set-browse rounded-lg w-50" id="myFile" name="file" type="file" />\
+                                 <br>\
+                                 <button type = "submit" class="btn btn-success">Submit</button> \
+                                 </div> \
+                                 <h6 id="upload-message" class="text-primary"><strong></strong></h6> \
+                            </form>'
+
             var browseForm = selection.html(inputForm)
-            
+
             //enent handing : get value on file upload
-            browseForm.on("change" , () => {
-                console.log("get browsed file:", d3.event.target.value)
-                // get uploaded file path
-                var file = d3.event.target.value ;                
-
-                console.log("Uploaded file:", file.split("\\")[2])
-
-                var uploaded_File = file.split("\\")[2] ;
-
-                // get prediction only if file name is not undefined
-                if (uploaded_File != undefined) {
-
-                    renderPredictedImage(uploaded_File);
-                }
-
-            // --------- TODO Copy to Main ------------- //
-            // var inputForm = '<form enctype="multipart/form-data" action="/upload" method="post"> \
-            //                      <div class="form-group"> \
-            //                      <label for="formFileSm" class="form-label h6 m-0">Upload a picture with maximum neighbours = 3 <br>\
-            //                      <span style="font-size:13px;"> ( File Format: .jpg, .png )</span> </label>\
-            //                      <input class="form-control form-control-sm set-browse rounded-lg w-50" id="myFile" type="file" />\
-            //                      <br>\
-            //                      <button type = "submit" class="btn btn-success">Submit</button> \
-            //                      </div> \
-            //                      <h6 id="upload-message" class="text-primary"><strong></strong></h6> \
-            //                 </form>'
-            // --------- TODO Copy to Main ------------- //
-            // var browseForm = selection.html(inputForm)
-
-            // //enent handing : get value on file upload
-            // browseForm.on("submit" , () => {
-            //     // --------- TODO Copy to Main ------------- //
-            //     console.log("get browsed file:", d3.event.target.value)
-            //     d3.select("#note").text("Image uploaded successfully!")
-            //     var saveLocation = './static/upload'
-            //     var fileFakePath = $("#myFile").val()
-            //     var fileName = fileFakePath.substring(12)
-
-            //     var runPath = `${saveLocation}/${fileName}`
-            //     console.log(runPath)
-
-            //     // renderPredictedImage(runPath)
-            //     // Render selected Image for prediction
-            //     d3.json(`/get_image/${fileName}`).then((data) => { 
-            //         console.log("Prediction Data:", data);
+            browseForm.on("submit" , () => {
     
-            //         var image_selector = d3.select("#predict_image")
-            //         image_selector.attr("src" , `${data.Image_path}`)
+                console.log("get browsed file:", $("#myFile").val())
+                d3.select("#note").text("Image uploaded successfully!")
+                var saveLocation = './static/upload'
+                var fileFakePath = $("#myFile").val()
+                var fileName = fileFakePath.substring(12)
+
+                var runPath = `${saveLocation}/${fileName}`
+                console.log(runPath)
+
+                // renderPredictedImage(runPath)
+                // Render selected Image for prediction
+                d3.json(`/get_image/${fileName}`).then((data) => { 
+                    console.log("Prediction Data:", data);
     
-            //     });
-                // --------- TODO Copy to Main ------------- //
-
-
-
+                    var image_selector = d3.select("#predict_image")
+                    image_selector.attr("src" , `${data.Image_path}`)
+    
+                });
 
             });  //End of browForm on change
 
@@ -228,13 +203,6 @@ $(document).ready(function(){
 
         //clear previous row data
         d3.select("div#select_option").html("").classed("set_browse_height set_div_height" , false)
-
-        // var camera_selector= d3.select("#show_camera");
-        // camera_selector.attr("src", "{{ url_for('video_feed') | safe }}")
-        // console.log(camera_selector.attr('src'))
-
-
-
 
     });
 
@@ -264,40 +232,9 @@ $(document).ready(function(){
         d3.select("#predict").style("display","none");
         
         // Add anaysis.html to div container
-        // document.getElementById("analyze").innerHTML='<object type="text/html" data="./static/analysis.html" ></object>';
         $("#analyze").load("./static/analysis.html");
 
     }); // End of click analysis
-
-
-    //===================================================================================//
-//    Create events for the Find Us option on the main page
-//==================================================================================//
-// $(document).on("click", "#analysis", function(){
-//     //print clicked option
-//     console.log("You clicked the option:", $(this).attr("id"));
-
-//     // Disable camera
-//     d3.select("#livevideo").style("display","none");
-
-//     //Make analysis report visible
-//     d3.select("#analyze").style("display","block");
-    
-//     //clear previous row data
-//     d3.select("div#select_option").html("")
-
-//     // set class false
-//     d3.select("div#select_option").html("").classed("set_browse_height set_div_height" , false)
-
-//     //Make prediction result invisible
-//     d3.select("#predict").style("display","none");
-    
-//     // Add anaysis.html to div container
-//     // document.getElementById("analyze").innerHTML='<object type="text/html" data="./static/analysis.html" ></object>';
-//     $("#analyze").load("./static/analysis.html");
-
-// }); // End of click analysis
-
 
 
 });//end of Jquery

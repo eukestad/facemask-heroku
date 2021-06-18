@@ -1,6 +1,5 @@
 #Import necessary libraries
-from flask import Flask, render_template, Response, jsonify, request, redirect, url_for, abort
-import cv2
+from flask import Flask, render_template, Response, jsonify, request, abort
 from werkzeug.utils import secure_filename
 import imghdr
 from get_data import prediction, get_sel_images
@@ -12,27 +11,21 @@ import os
 app = Flask(__name__)
 
 
-# ---------------------prediction function---------------------------#
-# predict  function   
+# ---------------------prediction function---------------------------# 
 def predicted_image(img_file):
     #print("img_file", img_file)
     experiment_images = ["people1.jpg", "people2.jpg", "people3.jpg", "people4.jpg", "people5.jpg", "people6.jpg", "people7.jpg"]
     if img_file not in experiment_images:
-    # --------- TODO Copy to Main ------------- #
-        # base_path = "./static/upload/"
-    # --------- Copy to Main ------------- #
-        base_path = "./Resources/UploadPic/"
+        base_path = "./static/upload/"
     else:
         base_path = "./Resources/Experiment/"
     img_path = base_path + img_file
     print("path:", img_path)
     data = prediction(img_path)
-    #print("data", data)
     return data
 # -------------------------------------------------------------------#
 
 
-# --------- TODO Copy to Main ------------- #
 UPLOAD_FOLDER = './static/upload'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
@@ -45,16 +38,12 @@ def validate_image(stream):
     if not format:
         return None
     return '.' + (format if format != 'jpeg' else 'jpg')
-# --------- Copy to Main ------------- #
-
 
 # default app route
 @app.route('/')
-@app.route('/<task>')
-def index(task=""):
-    return render_template('index.html' ,task=task)
+def index():
+    return render_template('index.html')
 
-# --------- TODO Copy to Main ------------- #
 @app.route('/upload', methods=["GET", "POST"])
 def uploader():
    if request.method == 'POST':
@@ -67,7 +56,7 @@ def uploader():
           f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
           print("Yay! It Worked!")
           return '', 204
-# --------- Copy to Main ------------- #
+
 
 # app route for image prediction
 @app.route("/get_image/<img>")

@@ -1,7 +1,6 @@
 # Loading all images using imread from a given folder
 import cv2
 import os
-# from PIL import Image
 import json
 #clear Screen
 os.system("cls")
@@ -17,23 +16,16 @@ import time
 
 
 face_model = cv2.CascadeClassifier('./Resources/haarcascade_frontalface_default.xml')
-model = load_model("./Model_Train_Test/keras_model.hdf5")
+model = load_model("./Resources/model/keras_model.hdf5")
 
 def prediction(path):
 
     # get Image from the path rendered
     img = cv2.imread(path)   
-    # Make predictions on the testing set
-    sample_img = cv2.resize(img,(128,128))
-    sample_img = np.reshape(sample_img,[1,128,128,3])
-    sample_img = sample_img/255.0
-    pred = model.predict(sample_img)
-    #print(pred)   
 
     # Uing Opencv2 to find social distancing and show mask prediction on the image
     mask_label = {0:'Mask Found',1:'No Mask Found'}
     color_label = {0:(0,255,0),1:(255,0,0)}
-    MIN_DISTANCE = 0
 
     # convert Image to grayscale for object identification
     img = cv2.cvtColor(img, cv2.IMREAD_GRAYSCALE)
@@ -42,7 +34,6 @@ def prediction(path):
     #check for no. of faces in the image
     # if more than one face found,
     if len(faces)>=1:
-        label = [0 for i in range(len(faces))]
 
         # convert Image to color for rescaling and predicton
         new_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR) #colored output image
@@ -123,18 +114,12 @@ def livePrediction():
         yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
 
-  
-        # cv2.imshow("Frame", frame)
-        # if cv2.waitKey(1) & 0xFF == ord('q'):
-        #     break
         key = cv2.waitKey(10)
     
         if key == 27: 
             break
     video_capture.release()
     cv2.destroyAllWindows()
-
-    # return round(pred[0][0]*100)
 
 # Function to load images from the folder
 def load_images_from_folder(folder):
@@ -143,8 +128,6 @@ def load_images_from_folder(folder):
     for filename in os.listdir(folder):
         img_files.append(filename)
     return img_files
-
-
 
 
 # Get images from the experiments folder to render to selection option on launch page
@@ -157,29 +140,9 @@ def get_sel_images():
     #print(images)
     return images
 
-# predict  function   
-# def predicted_image(img_file):
-#     #print("img_file", img_file)
-#     experiment_images = ["people1.jpg", "people2.jpg", "people3.jpg", "people4.jpg", "people5.jpg", "people6.jpg", "people7.jpg"]
-#     if img_file not in experiment_images:
-#         base_path = "./Resources/UploadPic/"
-#     else:
-#         base_path = "./Resources/Experiment/"
-#     img_path = base_path + img_file
-#     print("path:", img_path)
-#     data = prediction(img_path)
-#     #print("data", data)
-#     return data
-
-
-
-
-        
+     
     
 
 if __name__ == "__main__":
    
     images = get_sel_images()
-    #print(images)
-    img_file = predicted_image("people4.jpg")
-    print(img_file)
