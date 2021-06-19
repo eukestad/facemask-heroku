@@ -8,10 +8,10 @@ os.system("cls")
 import pandas as pd
 import numpy as np
 from tensorflow.keras.models import load_model
-from scipy.spatial import distance
+# from scipy.spatial import distance
 import pandas as pd
 import matplotlib.pyplot as plt
-import time
+# import time
 # import imutils
 
 
@@ -56,7 +56,7 @@ def prediction(path):
 
         plt.figure(figsize=(10,10))
         plt.imshow(new_img)
-        predicted_path = "./static/Images/predicted_image.jpg"
+        predicted_path = "./static/prediction/predicted_image.jpg"
         plt.savefig(predicted_path,bbox_inches='tight')
 
         # create a dictionary of results
@@ -114,12 +114,12 @@ def livePrediction():
         yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
 
-        key = cv2.waitKey(10)
+        # key = cv2.waitKey(10)
     
-        if key == 27: 
-            break
-    video_capture.release()
-    cv2.destroyAllWindows()
+        # if key == 27: 
+        #     break
+    # video_capture.release()
+    # cv2.destroyAllWindows()
 
 # Function to load images from the folder
 def load_images_from_folder(folder):
