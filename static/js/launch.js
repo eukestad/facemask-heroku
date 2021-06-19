@@ -59,7 +59,7 @@ $(document).ready(function(){
         //Get deafault image prediction
         // renderPredictedImage("people1.jpg");
         var image_selector = d3.select("#predict_image")
-            image_selector.attr("src" , `./static/images/default_prediction.jpg`)
+            image_selector.attr("src" , `./static/prediction/default_prediction.jpg`)
 
         // Make an API call to server to population the selection option with set of Images
         d3.json("/api/v1.0/select_option").then((data) => { 
