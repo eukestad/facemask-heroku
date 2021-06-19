@@ -3,11 +3,14 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/divya-gh/Face_Mask_Detection?style=for-the-badge)
 ![GitHub commits count](https://img.shields.io/github/last-commit/divya-gh/Face_Mask_Detection?style=for-the-badge)
 
+# Face Mask Detection Heroku App
 
-# Inspiration:
+## Due to issues deploying, the image selection is the only option available at this time.
+
+## Inspiration:
 <b/>
 
-## <p style="font-size:700%;">In San Antonio, the coronavirus pandemic officially began on March 2020 and by April 2020, the CDC began recommending face mask to help slow the spread of the virus. Since then, we have all, at one point or another, been subject to wearing a face mask.</p>
+#### <p style="font-size:700%;">In San Antonio, the coronavirus pandemic officially began on March 2020 and by April 2020, the CDC began recommending face mask to help slow the spread of the virus. Since then, we have all, at one point or another, been subject to wearing a face mask.</p>
 
 
 
@@ -15,8 +18,8 @@
 
 
 ---
-# Objective: 
-## Create a deep learning, convolutional neural network that detects people in images who are wearing face masks and not wearing face masks. 
+## Objective: 
+#### Create a deep learning, convolutional neural network that detects people in images who are wearing face masks and not wearing face masks. 
 
 ![Banner](https://github.com/nadiaaldrich/project_3/blob/190e95de6f04449c35960b96a1c7832212cc6835/README_Images/MaskNoMask.gif)
 ---
